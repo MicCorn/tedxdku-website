@@ -1,0 +1,192 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTc2dpRipWA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 200;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTcWdtRipWA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 300;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTch9tRipWA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTc2dtRipWA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 500;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTc69tRipWA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 600;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTcB9xRipWA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 700;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTcPtxRipWA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 800;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTcWdxRipWA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 900;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTccNxRipWA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyeAZ9hjQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuDyfAZ9hjQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuOKfAZ9hjQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hjQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZ9hjQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYAZ9hjQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYAZ9hjQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuDyYAZ9hjQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuBWYAZ9hjQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Georgian';
+  font-style: normal;
+  font-weight: 100;
+  font-stretch: normal;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/notoserifgeorgian/v26/VEMXRpd8s4nv8hG_qOzL7HOAw4nt0Sl_XxyaEduNMvi7T6Y4etRnmGhyLop-R3aSTvsvcD70.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Georgian';
+  font-style: normal;
+  font-weight: 200;
+  font-stretch: normal;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/notoserifgeorgian/v26/VEMXRpd8s4nv8hG_qOzL7HOAw4nt0Sl_XxyaEduNMvi7T6Y4etRnmGhyLop-R3aSzvovcD70.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Georgian';
+  font-style: normal;
+  font-weight: 300;
+  font-stretch: normal;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/notoserifgeorgian/v26/VEMXRpd8s4nv8hG_qOzL7HOAw4nt0Sl_XxyaEduNMvi7T6Y4etRnmGhyLop-R3aSEPovcD70.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Georgian';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/notoserifgeorgian/v26/VEMXRpd8s4nv8hG_qOzL7HOAw4nt0Sl_XxyaEduNMvi7T6Y4etRnmGhyLop-R3aSTvovcD70.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Georgian';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/notoserifgeorgian/v26/VEMXRpd8s4nv8hG_qOzL7HOAw4nt0Sl_XxyaEduNMvi7T6Y4etRnmGhyLop-R3aSfPovcD70.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Georgian';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/notoserifgeorgian/v26/VEMXRpd8s4nv8hG_qOzL7HOAw4nt0Sl_XxyaEduNMvi7T6Y4etRnmGhyLop-R3aSkP0vcD70.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Georgian';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/notoserifgeorgian/v26/VEMXRpd8s4nv8hG_qOzL7HOAw4nt0Sl_XxyaEduNMvi7T6Y4etRnmGhyLop-R3aSqf0vcD70.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Georgian';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: normal;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/notoserifgeorgian/v26/VEMXRpd8s4nv8hG_qOzL7HOAw4nt0Sl_XxyaEduNMvi7T6Y4etRnmGhyLop-R3aSzv0vcD70.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Georgian';
+  font-style: normal;
+  font-weight: 900;
+  font-stretch: normal;
+  src: url(http://web.archive.org/web/20240912063049im_/https://fonts.gstatic.com/s/notoserifgeorgian/v26/VEMXRpd8s4nv8hG_qOzL7HOAw4nt0Sl_XxyaEduNMvi7T6Y4etRnmGhyLop-R3aS5_0vcD70.ttf) format('truetype');
+}
+
+/*
+     FILE ARCHIVED ON 06:30:49 Sep 12, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 07:25:56 Jan 12, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.809
+  exclusion.robots: 0.034
+  exclusion.robots.policy: 0.019
+  esindex: 0.014
+  cdx.remote: 109.147
+  LoadShardBlock: 312.401 (3)
+  PetaboxLoader3.datanode: 469.323 (5)
+  load_resource: 258.355 (2)
+  PetaboxLoader3.resolve: 99.528
+*/
