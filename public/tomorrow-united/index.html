@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tomorrow United? | TEDxDKU Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ted-red: #e62b1e;
+      --ink: #0a0a0a;
+      --charcoal: #121212;
+      --slate: #1f1f1f;
+      --soft: #f6f6f6;
+      --max-width: 1180px;
+      --radius: 16px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", "Helvetica Neue", sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(230, 43, 30, 0.08), transparent 30%), radial-gradient(circle at 80% 0, rgba(230, 43, 30, 0.06), transparent 35%), linear-gradient(160deg, #0e0e0e, #060606 55%, #0b0b0b);
+      color: var(--soft);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header.top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(10, 10, 10, 0.78);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .top-bar__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .brand img {
+      height: 32px;
+      width: auto;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    nav a {
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition: background 160ms ease, color 160ms ease;
+    }
+
+    nav a:hover {
+      background: rgba(230, 43, 30, 0.12);
+      color: #fff;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 110px 24px 90px;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(230, 43, 30, 0.38), rgba(6, 6, 6, 0.6)), url("./assets/hero-stage.jpg") center/cover no-repeat;
+      filter: saturate(1.05) brightness(0.9);
+      z-index: -2;
+      transform: scale(1.02);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(230, 43, 30, 0.16), transparent 35%), radial-gradient(circle at 70% 10%, rgba(230, 43, 30, 0.12), transparent 30%);
+      z-index: -1;
+    }
+
+    .hero__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      gap: 28px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(36px, 4vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      text-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .lede {
+      max-width: 760px;
+      margin: 12px 0 0;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero__meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 16px 0 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 14px;
+    }
+
+    .pill svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--ted-red);
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .btn {
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border 160ms ease;
+    }
+
+    .btn.primary {
+      background: var(--ted-red);
+      color: #fff;
+      box-shadow: 0 12px 30px rgba(230, 43, 30, 0.35);
+    }
+
+    .btn.ghost {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      display: grid;
+      gap: 64px;
+    }
+
+    section {
+      display: grid;
+      gap: 18px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-header .dash {
+      width: 52px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--ted-red);
+    }
+
+    .card {
+      background: var(--charcoal);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .card__body {
+      padding: 18px 18px 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .card__body h3 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.01em;
+    }
+
+    .card__body p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .grid.speakers {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: stretch;
+    }
+
+    .about {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: start;
+    }
+
+    .about p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    footer {
+      padding: 32px 24px 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(10, 10, 10, 0.92);
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    footer .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (max-width: 720px) {
+      nav { display: none; }
+      .hero { padding-top: 90px; }
+      .card img { aspect-ratio: 4 / 5; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none; }
+      nav a, .pill { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <a class="brand" href="/index.html">
+        <img src="./assets/logo.png" alt="TEDxDKU">
+        <span>TEDxDKU Archive</span>
+      </a>
+      <nav aria-label="Page">
+        <a href="#about">About</a>
+        <a href="#team">Team</a>
+        <a href="#speakers">Speakers</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__inner">
+      <p class="eyebrow">Archive · 2024</p>
+      <h1 id="hero-title">Tomorrow United?</h1>
+      <p class="lede">A TEDxDKU experience exploring how shared purpose, curiosity, and courage can shape the worlds we build together.</p>
+      <div class="hero__meta">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v2H5v2H3v14h18V6h-2V4h-2V2h-2v2H9V2H7zm12 6v10H5V8h14zM7 10h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 14h2v2H7v-2zm4 0h2v2h-2v-2z" /></svg>
+          February 24, 2024
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5z" /></svg>
+          Duke Kunshan University
+        </span>
+      </div>
+      <div class="hero__actions">
+        <a class="btn primary" href="#speakers">Meet the speakers</a>
+        <a class="btn ghost" href="#team">See the organizers</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="about" aria-labelledby="about-title">
+      <div class="section-header">
+        <span class="dash" aria-hidden="true"></span>
+        <h2 id="about-title">About the event</h2>
+      </div>
+      <div class="about">
+        <p>“Tomorrow United?” invited the TEDxDKU community to imagine futures that are designed together—across disciplines, cultures, and lived experiences. The day gathered students, faculty, and global guests to share ideas on collaboration, creativity, and the responsibility we carry for the world ahead.</p>
+      </div>
+    </section>
+
+    <section id="team" aria-labelledby="team-title">
+      <div class="section-header">
+        <span class="dash" aria-hidden="true"></span>
+        <h2 id="team-title">Organizing team</h2>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <img src="./assets/team-noah.jpg" alt="Portrait of Noah Caplan">
+          <div class="card__body">
+            <h3>Noah Caplan</h3>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/team-colden.jpg" alt="Portrait of Colden Johnson">
+          <div class="card__body">
+            <h3>Colden Johnson</h3>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/team-michael.jpg" alt="Portrait of Michael Cornell">
+          <div class="card__body">
+            <h3>Michael Cornell</h3>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/team-gavin.jpg" alt="Portrait of Gavin Huang">
+          <div class="card__body">
+            <h3>Gavin Huang</h3>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/team-abdullah.jpg" alt="Portrait of Abdullah Javed">
+          <div class="card__body">
+            <h3>Abdullah Javed</h3>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/team-annie.jpg" alt="Portrait of Annie Tong">
+          <div class="card__body">
+            <h3>Annie Tong</h3>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/team-mateja.jpg" alt="Portrait of Mateja Bokan">
+          <div class="card__body">
+            <h3>Mateja Bokan</h3>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/team-kamila.jpg" alt="Portrait of Kamila Meija Ley">
+          <div class="card__body">
+            <h3>Kamila Meija Ley</h3>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/team-fatima.png" alt="Portrait of Fatima Khan">
+          <div class="card__body">
+            <h3>Fatima Khan</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="speakers" aria-labelledby="speakers-title">
+      <div class="section-header">
+        <span class="dash" aria-hidden="true"></span>
+        <h2 id="speakers-title">Speakers</h2>
+      </div>
+      <div class="grid speakers">
+        <article class="card">
+          <img src="./assets/speaker-dominika.jpg" alt="Portrait of Dominika Wilczok">
+          <div class="card__body">
+            <h3>Dominika Wilczok</h3>
+            <p>Dominika
+ is a Behavioral Neuroscientist in training and sophomore undergraduate 
+student at Duke Kunshan University. She is focused on biohacking ageism:
+ looking not only at how we can live a long life, but also a healthy and
+ happy one. She aims to bring the principles of healthy longevity to 
+everyone.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/speaker-davit.png" alt="Portrait of Davit Kavkasyan">
+          <div class="card__body">
+            <h3>Davit Kavkasyan</h3>
+            <p>Davit
+ is a Global Leaders Scholar at Duke Kunshan. Originally from Yerevan, 
+Armenia. he has been travelling the world since he was 17, and is 
+passionate about the creative arts. Having lived in both Armenia and 
+Israel, he has experienced the impact of conflict firsthand -- and the 
+importance of how we respond.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/speaker-james.jpg" alt="Portrait of James Miller">
+          <div class="card__body">
+            <h3>James Miller</h3>
+            <p>James
+ Miller is the inaugural Professor of Humanities at Duke Kunshan 
+University, Chair of the Faculty Assembly, and co-director of the DKU 
+Humanities Research Center.
+
+Dr. Miller's research is based in the study of Chinese philosophy, 
+theology, and religion, with an emphasis on philosophy of nature, 
+environmental ethics, and the intersection of religion and ecology in 
+China.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/speaker-luyao.jpg" alt="Portrait of Luyao Zhang">
+          <div class="card__body">
+            <h3>Luyao Zhang</h3>
+            <p>Prof.
+ Luyao "Sunshine" Zhang has dedicated her career to fostering 
+interdisciplinary scholarship and innovation, with a strong commitment 
+to open-sourcing multimedia intellectual properties to broaden global 
+access to education. Her pioneering work at the intersection of 
+computational and economic science embodies the profound traditional 
+wisdom that progress in humanity is deeply rooted in empathetic 
+understanding across boundaries.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/speaker-renee.jpg" alt="Portrait of Renee Richer">
+          <div class="card__body">
+            <h3>Renee Richer</h3>
+            <p>Dr.
+ Renee Richer describes her work as a biologist in search of the 
+mechanisms to life in extreme environments. Her work has taken place in 
+some of the poorest countries to some of the richest countries in the 
+world. From Armenia to Zimbabwe, her most important education came in 
+the form of greater cultural understanding and appreciation. 
+ 
+At a time when geopolitical tensions are on the rise and governments 
+increasingly isolate themselves and their citizens, scholars and 
+educators remain at the forefront of global cultural exchange.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/speaker-russell.png" alt="Portrait of Russell Cailey">
+          <div class="card__body">
+            <h3>Russell Cailey</h3>
+            <p>Russell
+ is the Managing Director of THINK Learning Studio (TLS) in Dubai and is
+ at the forefront of revolutionizing the educational sector with an 
+approach he calls “inspired fusion”. THINK Learning Studio’s unique 
+educational approach blends a project-focused innovative curriculum with
+ learning grounded by travel. Russell is dedicated to fostering 
+environments that deliver tangible, real-world learning experiences.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="./assets/speaker-rocco.jpg" alt="Portrait of Rocco Li">
+          <div class="card__body">
+            <h3>Rocco Li</h3>
+            <p>Rocco
+ Li is passionate about designing and implementing talent development 
+projects, contributing to talent cultivation and business resource 
+allocation.&nbsp;
+
+Rocco has a global perspective and cultural awareness, having lived and 
+worked in the U.S., China, Taiwan, Singapore, and Hong Kong. He has a 
+visionary and operational approach at the corporate, regional, and 
+country levels.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <strong>TEDxDKU Archive · Tomorrow United?</strong>
+      <span>Copyright TEDxDKU © 2024. All Rights Reserved.</span>
+      <span><a href="/index.html">Back to the main site</a></span>
+    </div>
+  </footer>
+</body>
+</html>
