@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder portrait for Menglu Jiang</title>
+  <desc id="desc">A red-gradient card with the speaker name.</desc>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a1a" />
+      <stop offset="100%" stop-color="#e62b1e" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" rx="24" fill="url(#grad)" />
+  <text x="50%" y="50%" fill="#ffffff" font-family="Poppins, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" text-anchor="middle">Menglu</text>
+  <text x="50%" y="57%" fill="#f6f6f6" font-family="Poppins, Helvetica, Arial, sans-serif" font-size="20" text-anchor="middle">Jiang</text>
+</svg>
