@@ -1,7 +1,5 @@
 ## Principles
 - Print `AGENT TOP LEVEL OK` to let me know you see this file
-- When adding code, make the smallest change that solves the problem; avoid large refactors unless asked.
-- Prefer minimum-complexity solutions and avoid unnecessary abstractions.
 - Treat web.archive.org content as reference/source material, NOT the target for new development.
 - Do not delete existing comments; they are meaningful.
 
