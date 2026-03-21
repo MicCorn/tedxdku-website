@@ -5,6 +5,7 @@ import {
   Libre_Baskerville,
   Oswald,
 } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const displayFont = Oswald({
@@ -45,6 +46,7 @@ export default function RootLayout({
       <body
         className={`${displayFont.variable} ${bodyFont.variable} ${latexFont.variable} ${monoFont.variable}`}
       >
+        <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" strategy="afterInteractive" />
         {children}
       </body>
     </html>

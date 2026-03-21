@@ -117,6 +117,7 @@ export default function Home() {
 
         <Link href="/reserve" className="nav-ticket">
           Get Tickets
+          <iconify-icon icon="solar:ticket-linear" class="text-base" aria-hidden="true" />
         </Link>
       </header>
 
@@ -131,7 +132,7 @@ export default function Home() {
           <div className="hero-meta">
             <div className="hero-meta-item">
               <span>Date</span>
-              <p>To be announced</p>
+              <p>March 27th, 2026</p>
             </div>
 
             <div className="hero-meta-item">
@@ -140,8 +141,9 @@ export default function Home() {
             </div>
 
             <div className="hero-meta-item hero-meta-cta">
-              <Link href="/reserve" className="hero-ticket">
+              <Link href="#tickets" className="hero-ticket">
                 Get Tickets
+                <iconify-icon icon="solar:arrow-right-linear" class="text-base" aria-hidden="true" />
               </Link>
             </div>
           </div>
@@ -176,10 +178,7 @@ export default function Home() {
 
           <div className="concept-copy">
             <p className="concept-lead">
-              Disorders of Magnitude asks what happens when our inherited sense of
-              scale stops working, when tiny shifts trigger systemic consequences,
-              when quiet voices are undervalued, and when dominant measures no longer
-              match reality.
+              What happens when scale fails, and our measures no longer match reality?
             </p>
             <p>
               Our Theme Disorders of Magnitude centers on breaking down the
@@ -285,6 +284,7 @@ export default function Home() {
           <div className="tickets-actions">
             <Link href="/reserve" className="ticket-button">
               Get Tickets
+              <iconify-icon icon="solar:ticket-linear" class="text-base" aria-hidden="true" />
             </Link>
             <span className="ticket-note">Selling fast - limited seats available</span>
           </div>

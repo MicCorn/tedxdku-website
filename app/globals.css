@@ -68,6 +68,20 @@ img {
   overflow: hidden;
 }
 
+.summit-page::after {
+  content: "";
+  position: fixed;
+  right: -12rem;
+  bottom: -12rem;
+  z-index: -1;
+  width: 34rem;
+  height: 34rem;
+  border-radius: 999px;
+  background: rgba(235, 0, 40, 0.14);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
 .noise-overlay {
   position: fixed;
   inset: 0;
@@ -157,6 +171,7 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.6rem;
   border-radius: 999px;
   background: #ffffff;
   color: #000000;
@@ -184,6 +199,20 @@ img {
 .ticket-button:focus-visible {
   background: #e4e4e7;
   transform: translateY(-1px);
+}
+
+.button-icon {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-block;
+}
+
+.nav-ticket iconify-icon,
+.hero-ticket iconify-icon,
+.ticket-button iconify-icon {
+  flex: 0 0 auto;
+  color: #000000;
+  line-height: 1;
 }
 
 .hero-shell {
@@ -240,7 +269,7 @@ img {
   align-items: flex-end;
   justify-content: flex-start;
   gap: clamp(0.45rem, 1vw, 0.8rem);
-  color: var(--muted-soft);
+  color: #ffffff;
   font-family: var(--font-latex), serif;
   font-size: clamp(2.8rem, 6vw, 5.3rem);
   font-weight: 400;
@@ -273,7 +302,7 @@ img {
 }
 
 .disorder-motion {
-  color: var(--muted-soft);
+  color: #ffffff;
 }
 
 .shift-up {
@@ -299,7 +328,7 @@ img {
 }
 
 .of-word {
-  color: #52525b;
+  color: rgba(255, 255, 255, 0.82);
   font-family: var(--font-latex), serif;
   font-size: 0.68em;
   font-style: italic;
@@ -653,13 +682,7 @@ img {
   padding: 2rem 1rem;
   margin-inline: -1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  transition:
-    padding 300ms ease,
-    background-color 300ms ease;
-}
-
-.schedule-item:hover {
-  padding-inline: 1.5rem;
+  transition: background-color 300ms ease;
 }
 
 .schedule-item-active {
