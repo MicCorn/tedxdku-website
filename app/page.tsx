@@ -6,51 +6,51 @@ import tedxDkuWhiteLogo from "../logos/TEDxDKU_basicLogoPack/TEDxDKU_white.png";
 
 const speakerCards = [
   {
-    role: "Astrophysicist",
-    name: "Dr. Elena Rostova",
-    copy: "Mapping the dark matter web and its implications on galactic formation.",
+    role: "Partner at IBM Consulting",
+    name: "Sun Yan",
+    copy: "From Freshman Year to Forever: Growing Together in Life and Career",
     tone: "speaker-surface-1",
   },
   {
-    role: "Behavioral Economist",
-    name: "Marcus Chen",
-    copy: "The exponential cost of micro-decisions in global markets.",
+    role: "DKU Professor",
+    name: "Tommaso Tesei",
+    copy: "The Power of Cognitive Dissonance",
     tone: "speaker-surface-2",
   },
   {
-    role: "Bio-engineer",
-    name: "Sarah Al-Fayed",
-    copy: "Engineering bacteria to consume atmospheric carbon at scale.",
+    role: "DKU Student",
+    name: "Kate Elosta",
+    copy: "Rethinking Parenthood: The Case for Shared Lactation",
     tone: "speaker-surface-1",
   },
   {
-    role: "Climate Modeler",
-    name: "Dr. Aris Thorne",
-    copy: "Predicting the timeline of planetary tipping points.",
+    role: "DKU Professor",
+    name: "Ian McNally",
+    copy: "The Art of Infinite Change",
     tone: "speaker-surface-2",
   },
   {
-    role: "Quantum Physicist",
-    name: "Dr. Maya Lin",
-    copy: "The exponential collapse of modern cryptographic infrastructure.",
+    role: "DKU Alumnus",
+    name: "Ace Asim",
+    copy: "Communitarianism and AI Ethics",
     tone: "speaker-surface-1",
   },
   {
-    role: "Sociologist",
-    name: "Elias Vance",
-    copy: "Viral dynamics and the speed of modern social contagion.",
+    role: "DKU Student",
+    name: "Coco Zhang",
+    copy: "The Environmentalism Trap: From Consumer Guilt to Conscious Living",
     tone: "speaker-surface-2",
   },
   {
-    role: "Urban Architect",
-    name: "Kaelen Ray",
-    copy: "Designing sustainable infrastructure for fractal megacities.",
+    role: "DKU Student",
+    name: "Teohan Blind",
+    copy: "Fix the Money, Fix the World",
     tone: "speaker-surface-1",
   },
   {
-    role: "Neuroscientist",
-    name: "Nia Okafor",
-    copy: "Rewiring human perception of deep time and cosmic scale.",
+    role: "DKU Student",
+    name: "Roberto Adames",
+    copy: "The Power of a Card",
     tone: "speaker-surface-2",
   },
 ];
@@ -103,24 +103,36 @@ const scheduleItems = [
 
 const teamMembers = [
   {
-    name: "Alex Rivera",
+    name: "Noah Caplan",
     role: "Lead Organizer",
   },
   {
-    name: "Jordan Lee",
+    name: "Jiyuan Liu",
+    role: "Lead Organizer",
+  },
+  {
+    name: "Colden Johnson",
     role: "Curation Director",
   },
   {
-    name: "Sam Taylor",
-    role: "Experience Design",
+    name: "Alessia Barreca",
+    role: "Event Management",
   },
   {
-    name: "Casey Smith",
-    role: "Partnerships",
+    name: "Mateja Bokan",
+    role: "Technical Director",
   },
   {
-    name: "Morgan Davis",
-    role: "Marketing & PR",
+    name: "Ethan Deal",
+    role: "Design",
+  },
+  {
+    name: "Giorgia Guardamagn",
+    role: "Marketing",
+  },
+    {
+    name: "Michael Cornell",
+    role: "Digital Operations",
   },
 ];
 
@@ -261,13 +273,23 @@ export default function Home() {
             </p>
 
             <div className="concept-cards">
-              <article className="concept-card">
+              <article className="concept-card group">
+                <iconify-icon
+                  icon="solar:maximize-square-minimalistic-linear"
+                  class="text-2xl text-zinc-600 group-hover:text-white transition-colors"
+                  aria-hidden="true"
+                />
                 <span>Macro</span>
-                <p>Global systems, cultural hierarchies, and the scales that dominate public attention.</p>
+                <p>Global systems, societal shifts, planetary impact.</p>
               </article>
-              <article className="concept-card">
+              <article className="concept-card group">
+                <iconify-icon
+                  icon="solar:minimize-square-minimalistic-linear"
+                  class="text-2xl text-zinc-600 group-hover:text-white transition-colors"
+                  aria-hidden="true"
+                />
                 <span>Micro</span>
-                <p>Subtle actions, overlooked actors, and minute forces that alter outcomes from the ground up.</p>
+                <p>Quantum mechanics, individual actions, cellular change.</p>
               </article>
             </div>
           </div>
@@ -395,20 +417,23 @@ export default function Home() {
             const prevBtn = document.getElementById('prev-speaker');
             const nextBtn = document.getElementById('next-speaker');
 
-            const getScrollAmount = () => {
-              if (!carousel) return 0;
-              const card = carousel.querySelector('.speaker-card');
-              return card ? card.offsetWidth + 1 : 0;
-            };
+            if (carousel && !carousel.dataset.carouselBound) {
+              carousel.dataset.carouselBound = 'true';
 
-            if (nextBtn && prevBtn && carousel) {
-              nextBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-              });
+              const getScrollAmount = () => {
+                const card = carousel.querySelector('.speaker-card');
+                return card.offsetWidth + 1;
+              };
 
-              prevBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-              });
+              if(nextBtn && prevBtn && carousel) {
+                nextBtn.addEventListener('click', () => {
+                  carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                });
+
+                prevBtn.addEventListener('click', () => {
+                  carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                });
+              }
             }
 
             const pastEventsBtn = document.getElementById('past-events-btn');
