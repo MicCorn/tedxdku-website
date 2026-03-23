@@ -57,47 +57,67 @@ const speakerCards = [
 
 const scheduleItems = [
   {
-    time: "08:30 AM",
-    title: "Doors Open & Registration",
-    copy: "Arrival, check-in, coffee, and the first conversations before the theater opens.",
-  },
-  {
-    time: "09:30 AM",
-    title: "Opening Remarks",
-    copy: "The organizing team frames the day and introduces Disorders of Magnitude.",
-  },
-  {
-    time: "10:00 AM",
-    label: "Session 1",
-    title: "The Macro: Systems at Scale",
-    copy: "Talks on planetary infrastructures, collective risk, and the institutions that determine what counts.",
+    time: "11:30 AM",
+    title: "Registration",
+    copy: "Check in and grab your name badge. Don't forget to fill out the conversation starter!",
   },
   {
     time: "12:00 PM",
-    title: "Lunch & Networking",
-    copy: "A slower interval for reflection, conversation, and interdisciplinary collisions.",
+    label: "Session One",
+    title: "Opening Remarks",
+    copy: "A welcome to TEDxDKU 2026 and an introduction to the ideas shaping the day.",
   },
   {
-    time: "01:30 PM",
-    label: "Session 2",
-    title: "The Micro: Invisible Catalysts",
-    copy: "Talks exploring tiny mechanisms, quiet actors, and hidden forces that reshape visible worlds.",
+    time: "",
+    title: "Teohan Blind",
+    copy: "Fix the Money, Fix the World.",
   },
   {
-    time: "03:00 PM",
-    title: "Coffee Break",
-    copy: "Reset, regroup, and continue the conversations between sessions.",
+    time: "",
+    title: "Coco Zhang",
+    copy: "The Environmentalism Trap: From Consumer Guilt to Conscious Living.",
   },
   {
-    time: "03:30 PM",
+    time: "",
+    title: "Ian McNally",
+    copy: "The Art of Infinite Change.",
+  },
+  {
+    time: "",
+    title: "Ace Asim",
+    copy: "Communitarianism and AI Ethics.",
+  },
+  {
+    time: "13:15 PM",
+    title: "Tea Break",
+    copy: "Meet the speakers, start conversations with (new) friends, and enjoy beverages plus a light lunch.",
+  },
+  {
+    time: "13:45 PM",
+    label: "Session Two",
+    title: "Tommaso Tesei",
+    copy: "The Power of Cognitive Dissonance.",
+  },
+  {
+    time: "",
+    title: "Roberto Adames",
+    copy: "The Power of a Card.",
+  },
+  {
+    time: "",
+    title: "Sun Yan",
+    copy: "From Freshman Year to Forever: Growing Together in Life and Career.",
+  },
+  {
+    time: "",
+    title: "Kate Elosta",
+    copy: "Rethinking Parenthood: The Case for Shared Lactation.",
+  },
+  {
+    time: "15:00 PM",
     label: "Closing",
-    title: "Synthesis Panel",
-    copy: "Speakers and organizers return to the central question: how should we reassign scale, weight, and value?",
-  },
-  {
-    time: "05:00 PM",
-    title: "Reception",
-    copy: "An informal close with music, conversation, and room for the ideas to keep moving.",
+    title: "Closing Remarks",
+    copy: "A final reflection to conclude the program and carry the conversations beyond the theater.",
   },
 ];
 
@@ -203,7 +223,6 @@ export default function Home() {
 
       <section className="hero-shell">
         <div className="hero-inner">
-          <p className="hero-kicker">An independently organized TED event</p>
 
           <div className="hero-title-wrap">
             <DisordersTitle />
@@ -305,11 +324,6 @@ export default function Home() {
           </div>
 
           <div className="voices-controls">
-            <Link href="/reserve" className="section-link">
-              View Full Lineup
-              <iconify-icon icon="solar:arrow-right-linear" class="text-base" aria-hidden="true" />
-            </Link>
-
             <div className="catalog-controls">
               <button
                 id="prev-speaker"
@@ -357,7 +371,10 @@ export default function Home() {
 
         <div className="schedule-list">
           {scheduleItems.map((item) => (
-            <article className={`schedule-item${item.label ? " schedule-item-active" : ""}`} key={item.time}>
+            <article
+              className={`schedule-item${item.label ? " schedule-item-active" : ""}`}
+              key={`${item.time}-${item.title}`}
+            >
               <div className="schedule-time">{item.time}</div>
               <div className="schedule-copy">
                 {item.label ? <span className="schedule-label">{item.label}</span> : null}
@@ -404,7 +421,7 @@ export default function Home() {
               Get Tickets
               <iconify-icon icon="solar:ticket-linear" class="text-base" aria-hidden="true" />
             </Link>
-            <span className="ticket-note">Selling fast - limited seats available</span>
+            <span className="ticket-note">Going fast - limited seats available</span>
           </div>
         </div>
       </section>
