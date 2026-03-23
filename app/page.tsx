@@ -417,23 +417,20 @@ export default function Home() {
             const prevBtn = document.getElementById('prev-speaker');
             const nextBtn = document.getElementById('next-speaker');
 
-            if (carousel && !carousel.dataset.carouselBound) {
-              carousel.dataset.carouselBound = 'true';
+            const getScrollAmount = () => {
+              if (!carousel) return 0;
+              const card = carousel.querySelector('.speaker-card');
+              return card ? card.offsetWidth + 1 : 0;
+            };
 
-              const getScrollAmount = () => {
-                const card = carousel.querySelector('.speaker-card');
-                return card.offsetWidth + 1;
-              };
+            if (nextBtn && prevBtn && carousel) {
+              nextBtn.addEventListener('click', () => {
+                carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+              });
 
-              if(nextBtn && prevBtn && carousel) {
-                nextBtn.addEventListener('click', () => {
-                  carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-                });
-
-                prevBtn.addEventListener('click', () => {
-                  carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-                });
-              }
+              prevBtn.addEventListener('click', () => {
+                carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+              });
             }
 
             const pastEventsBtn = document.getElementById('past-events-btn');

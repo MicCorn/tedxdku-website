@@ -765,7 +765,6 @@ img {
   overflow: hidden;
   background: #050505;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .speaker-surface,
