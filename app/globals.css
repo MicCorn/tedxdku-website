@@ -768,6 +768,7 @@ img {
 }
 
 .speaker-surface,
+.speaker-photo,
 .speaker-gradient {
   position: absolute;
   inset: 0;
@@ -778,6 +779,13 @@ img {
     radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.06), transparent 20rem),
     linear-gradient(180deg, #1a1a1d, #09090b);
   filter: grayscale(1);
+  transition: filter 700ms ease;
+}
+
+.speaker-photo {
+  object-fit: cover;
+  object-position: center;
+  filter: none;
   transition: filter 700ms ease;
 }
 
@@ -795,7 +803,14 @@ img {
 
 .speaker-gradient {
   z-index: 1;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.88));
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 0.40) 82%,
+      rgba(0, 0, 0, 0.88) 100%
+    );
 }
 
 .speaker-content {
@@ -928,6 +943,12 @@ img {
     linear-gradient(180deg, #19191d, #09090b);
   filter: grayscale(1);
   transition: filter 700ms ease;
+}
+
+.team-photo {
+  object-fit: cover;
+  object-position: center;
+  background: none;
 }
 
 .team-card:hover .team-portrait,
@@ -1088,6 +1109,14 @@ img {
     gap: 1.25rem;
   }
 
+  .summit-brand {
+    max-width: min(100%, 8.1rem);
+  }
+
+  .summit-logo {
+    height: 1.62rem;
+  }
+
   .hero-shell {
     padding-top: 9rem;
   }
@@ -1123,9 +1152,13 @@ img {
     align-items: flex-start;
   }
 
-  .team-grid,
   .concept-cards {
     grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
   }
 
   .speaker-card {

@@ -6,40 +6,46 @@ import tedxDkuWhiteLogo from "../logos/TEDxDKU_basicLogoPack/TEDxDKU_white.png";
 
 const speakerCards = [
   {
-    role: "Partner at IBM Consulting",
-    name: "Sun Yan",
-    copy: "From Freshman Year to Forever: Growing Together in Life and Career",
-    tone: "speaker-surface-1",
-  },
-  {
-    role: "DKU Professor",
+    role: "Professor of Humanities at DKU",
     name: "Tommaso Tesei",
     copy: "The Power of Cognitive Dissonance",
     tone: "speaker-surface-2",
+    photo: "/headshots/Tommaso.jpg",
   },
   {
     role: "DKU Student",
     name: "Kate Elosta",
     copy: "Rethinking Parenthood: The Case for Shared Lactation",
     tone: "speaker-surface-1",
-  },
-  {
-    role: "DKU Professor",
-    name: "Ian McNally",
-    copy: "The Art of Infinite Change",
-    tone: "speaker-surface-2",
+    photo: "/headshots/kate.jpg",
   },
   {
     role: "DKU Alumnus",
     name: "Ace Asim",
     copy: "Communitarianism and AI Ethics",
     tone: "speaker-surface-1",
+    photo: "/headshots/ace.jpg",
+  },
+  {
+    role: "Partner at IBM Consulting",
+    name: "Sun Yan",
+    copy: "From Freshman Year to Forever: Growing Together in Life and Career",
+    tone: "speaker-surface-1",
+    photo: "/headshots/Sun_Yan.jpg",
+  },
+  {
+    role: "DKU WLS Coach",
+    name: "Ian McNally",
+    copy: "The Art of Infinite Change",
+    tone: "speaker-surface-2",
+    photo: "/headshots/Ian_McNally.jpg",
   },
   {
     role: "DKU Student",
     name: "Coco Zhang",
     copy: "The Environmentalism Trap: From Consumer Guilt to Conscious Living",
     tone: "speaker-surface-2",
+    photo: "/headshots/coco.jpg",
   },
   {
     role: "DKU Student",
@@ -52,6 +58,7 @@ const speakerCards = [
     name: "Roberto Adames",
     copy: "The Power of a Card",
     tone: "speaker-surface-2",
+    photo: "/headshots/Roberto.jpg",
   },
 ];
 
@@ -125,18 +132,22 @@ const teamMembers = [
   {
     name: "Noah Caplan",
     role: "Lead Organizer",
+    photo: "/headshots/noah.jpg",
   },
   {
     name: "Jiyuan Liu",
     role: "Lead Organizer",
+    photo: "/headshots/Jiyuan_Liu.jpg",
   },
   {
     name: "Colden Johnson",
     role: "Curation Director",
+    photo: "/headshots/colden.jpg",
   },
   {
     name: "Alessia Barreca",
     role: "Event Management",
+    photo: "/headshots/alessia.jpg",
   },
   {
     name: "Mateja Bokan",
@@ -145,14 +156,17 @@ const teamMembers = [
   {
     name: "Ethan Deal",
     role: "Design",
+    photo: "/headshots/ethan.jpg",
   },
   {
     name: "Giorgia Guardamagn",
     role: "Marketing",
+    photo: "/headshots/Giorgia.jpg",
   },
-    {
+  {
     name: "Michael Cornell",
     role: "Digital Operations",
+    photo: "/headshots/michael.jpg",
   },
 ];
 
@@ -350,8 +364,18 @@ export default function Home() {
           <div id="speaker-carousel" className="speaker-carousel">
             {speakerCards.map((speaker) => (
               <article className="speaker-card" key={speaker.name}>
+                {speaker.photo ? (
+                  <Image
+                    src={speaker.photo}
+                    alt={`Portrait of ${speaker.name}`}
+                    fill
+                    sizes="(max-width: 54rem) 100vw, (max-width: 72rem) 50vw, 33vw"
+                    className="speaker-photo"
+                  />
+                ) : (
+                  <div className={`speaker-surface ${speaker.tone}`} />
+                )}
                 <div className="speaker-gradient" />
-                <div className={`speaker-surface ${speaker.tone}`} />
                 <div className="speaker-content">
                   <span>{speaker.role}</span>
                   <h3>{speaker.name}</h3>
@@ -397,7 +421,17 @@ export default function Home() {
           {teamMembers.map((member, index) => (
             <article className="team-card" key={member.name}>
               <div className="team-portrait-frame">
-                <div className={`team-portrait team-portrait-${(index % 3) + 1}`} />
+                {member.photo ? (
+                  <Image
+                    src={member.photo}
+                    alt={`Portrait of ${member.name}`}
+                    fill
+                    sizes="(max-width: 54rem) 100vw, (max-width: 72rem) 33vw, 20vw"
+                    className="team-portrait team-photo"
+                  />
+                ) : (
+                  <div className={`team-portrait team-portrait-${(index % 3) + 1}`} />
+                )}
               </div>
               <div className="team-copy">
                 <h3>{member.name}</h3>
