@@ -102,6 +102,11 @@ const scheduleItems = [
   {
     time: "13:45 PM",
     label: "Session Two",
+    title: "Kate Elosta",
+    copy: "Rethinking Parenthood: The Case for Shared Lactation.",
+  },
+  {
+    time: "",
     title: "Tommaso Tesei",
     copy: "The Power of Cognitive Dissonance.",
   },
@@ -114,11 +119,6 @@ const scheduleItems = [
     time: "",
     title: "Sun Yan",
     copy: "From Freshman Year to Forever: Growing Together in Life and Career.",
-  },
-  {
-    time: "",
-    title: "Kate Elosta",
-    copy: "Rethinking Parenthood: The Case for Shared Lactation.",
   },
   {
     time: "15:00 PM",
