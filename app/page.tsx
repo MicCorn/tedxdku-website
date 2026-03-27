@@ -52,6 +52,7 @@ const speakerCards = [
     name: "Teohan Blind",
     copy: "Fix the Money, Fix the World",
     tone: "speaker-surface-1",
+    photo: "/headshots/teo.jpg",
   },
   {
     role: "DKU Student",
