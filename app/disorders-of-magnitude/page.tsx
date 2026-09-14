@@ -1,16 +1,31 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import DisordersTitle from "./components/disorders-title";
-import tedxDkuWhiteLogo from "../logos/TEDxDKU_basicLogoPack/TEDxDKU_white.png";
+import DisordersTitle from "../components/disorders-title";
+import SpeakerShowcase, {
+  type ArchivedSpeaker,
+} from "../components/speaker-showcase";
+import tedxDkuWhiteLogo from "../../logos/TEDxDKU_basicLogoPack/TEDxDKU_white.png";
 
-const speakerCards = [
+export const metadata: Metadata = {
+  title: "TEDxDKU | Disorders of Magnitude — Past Event",
+  description:
+    "Archived recap of TEDxDKU's Disorders of Magnitude, held March 27th, 2026 at Duke Kunshan University. Watch every speaker talk on YouTube.",
+};
+
+// Swap PLACEHOLDER_VIDEO_ID for each speaker's real YouTube ID as talks go
+// live — "Me at the zoo", YouTube's first-ever upload, stands in until then.
+const PLACEHOLDER_VIDEO_ID = "jNQXAC9IVRw";
+
+const speakerCards: ArchivedSpeaker[] = [
   {
     role: "Professor of Humanities at DKU",
     name: "Tommaso Tesei",
     copy: "The Power of Cognitive Dissonance",
     tone: "speaker-surface-2",
     photo: "/headshots/Tommaso.jpg",
+    videoId: PLACEHOLDER_VIDEO_ID,
   },
   {
     role: "DKU Student",
@@ -18,6 +33,7 @@ const speakerCards = [
     copy: "Rethinking Parenthood: The Case for Shared Lactation",
     tone: "speaker-surface-1",
     photo: "/headshots/kate.jpg",
+    videoId: PLACEHOLDER_VIDEO_ID,
   },
   {
     role: "DKU Alumnus",
@@ -25,6 +41,7 @@ const speakerCards = [
     copy: "Communitarianism and AI Ethics",
     tone: "speaker-surface-1",
     photo: "/headshots/ace.jpg",
+    videoId: PLACEHOLDER_VIDEO_ID,
   },
   {
     role: "Partner at IBM Consulting",
@@ -32,6 +49,7 @@ const speakerCards = [
     copy: "From Freshman Year to Forever: Growing Together in Life and Career",
     tone: "speaker-surface-1",
     photo: "/headshots/Sun_Yan.jpg",
+    videoId: PLACEHOLDER_VIDEO_ID,
   },
   {
     role: "DKU WLS Coach",
@@ -39,6 +57,7 @@ const speakerCards = [
     copy: "The Art of Infinite Change",
     tone: "speaker-surface-2",
     photo: "/headshots/Ian_McNally.jpg",
+    videoId: PLACEHOLDER_VIDEO_ID,
   },
   {
     role: "DKU Student",
@@ -46,6 +65,7 @@ const speakerCards = [
     copy: "The Environmentalism Trap: From Consumer Guilt to Conscious Living",
     tone: "speaker-surface-2",
     photo: "/headshots/coco.jpg",
+    videoId: PLACEHOLDER_VIDEO_ID,
   },
   {
     role: "DKU Student",
@@ -53,6 +73,7 @@ const speakerCards = [
     copy: "Fix the Money, Fix the World",
     tone: "speaker-surface-1",
     photo: "/headshots/teo.jpg",
+    videoId: PLACEHOLDER_VIDEO_ID,
   },
   {
     role: "DKU Student",
@@ -60,6 +81,7 @@ const speakerCards = [
     copy: "The Power of a Card",
     tone: "speaker-surface-2",
     photo: "/headshots/Roberto.jpg",
+    videoId: PLACEHOLDER_VIDEO_ID,
   },
 ];
 
@@ -67,13 +89,13 @@ const scheduleItems = [
   {
     time: "11:30 AM",
     title: "Registration",
-    copy: "Check in and grab your name badge. Don't forget to fill out the conversation starter!",
+    copy: "Attendees checked in, grabbed their name badges, and filled out the conversation starter.",
   },
   {
     time: "12:00 PM",
     label: "Session One",
     title: "Opening Remarks",
-    copy: "A welcome to TEDxDKU 2026 and an introduction to the ideas shaping the day.",
+    copy: "A welcome to TEDxDKU 2026 and an introduction to the ideas that shaped the day.",
   },
   {
     time: "",
@@ -98,7 +120,7 @@ const scheduleItems = [
   {
     time: "13:15 PM",
     title: "Tea Break",
-    copy: "Meet the speakers, start conversations with (new) friends, and enjoy beverages plus a light lunch.",
+    copy: "Speakers and attendees mingled over beverages and a light lunch.",
   },
   {
     time: "13:45 PM",
@@ -125,7 +147,7 @@ const scheduleItems = [
     time: "15:00 PM",
     label: "Closing",
     title: "Closing Remarks",
-    copy: "A final reflection to conclude the program and carry the conversations beyond the theater.",
+    copy: "A final reflection that closed the program and carried the conversations beyond the theater.",
   },
 ];
 
@@ -179,7 +201,7 @@ const marqueeItems = [
   "Transformative Change",
 ];
 
-export default function Home() {
+export default function ArchivedDisordersOfMagnitude() {
   return (
     <main className="summit-page">
       <div className="noise-overlay" aria-hidden="true" />
@@ -236,16 +258,16 @@ export default function Home() {
           </div>
         </nav>
 
-        <Link href="/reserve" className="nav-ticket">
-          Get Tickets
-          <iconify-icon icon="solar:ticket-linear" class="text-base" aria-hidden="true" />
-        </Link>
+        <a href="#speakers" className="nav-ticket">
+          Watch Talks
+          <iconify-icon icon="solar:play-circle-linear" class="text-base" aria-hidden="true" />
+        </a>
       </header>
 
       <section className="hero-shell">
         <div className="hero-inner">
-
           <div className="hero-title-wrap">
+            <span className="hero-kicker">TEDxDKU 2026 — Past Event</span>
             <DisordersTitle />
           </div>
 
@@ -261,10 +283,10 @@ export default function Home() {
             </div>
 
             <div className="hero-meta-item hero-meta-cta">
-              <Link href="#tickets" className="hero-ticket">
-                Get Tickets
+              <a href="#speakers" className="hero-ticket">
+                Watch Talks
                 <iconify-icon icon="solar:arrow-right-linear" class="text-base" aria-hidden="true" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -299,17 +321,18 @@ export default function Home() {
 
           <div className="concept-copy">
             <p className="concept-lead">
-              What happens when scale fails, and our measures no longer match reality?
+              What happened when scale fails, and our measures no longer
+              match reality?
             </p>
             <p>
-              Disorders of Magnitude explores the fixed-magnitude biases we inherit
-              across fields: assumptions about which voices, impacts, and priorities
-              deserve to outweigh others.
+              Disorders of Magnitude explored the fixed-magnitude biases we
+              inherit across fields: assumptions about which voices, impacts,
+              and priorities deserve to outweigh others.
             </p>
             <p>
-              It asks us to unlearn default orders, rethink value from the ground
-              up, and trace how microscopic shifts can trigger systemic change far
-              beyond what our instincts are prepared to measure.
+              It asked us to unlearn default orders, rethink value from the
+              ground up, and trace how microscopic shifts can trigger systemic
+              change far beyond what our instincts are prepared to measure.
             </p>
 
             <div className="concept-cards">
@@ -336,68 +359,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Speakers Carousel */}
-      <section className="section-shell voices-section" id="speakers">
-        <div className="section-header voices-header">
-          <div>
-            <span className="section-index">02 / Voices</span>
-            <h2>Catalysts of Change</h2>
-          </div>
-
-          <div className="voices-controls">
-            <div className="catalog-controls">
-              <button
-                id="prev-speaker"
-                className="catalog-arrow"
-                type="button"
-                aria-label="Previous speakers"
-              >
-                <iconify-icon icon="solar:alt-arrow-left-linear" class="text-xl" aria-hidden="true" />
-              </button>
-              <button
-                id="next-speaker"
-                className="catalog-arrow"
-                type="button"
-                aria-label="Next speakers"
-              >
-                <iconify-icon icon="solar:alt-arrow-right-linear" class="text-xl" aria-hidden="true" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Carousel Container */}
-        <div className="catalog-shell">
-          <div id="speaker-carousel" className="speaker-carousel">
-            {speakerCards.map((speaker) => (
-              <article className="speaker-card" key={speaker.name}>
-                {speaker.photo ? (
-                  <Image
-                    src={speaker.photo}
-                    alt={`Portrait of ${speaker.name}`}
-                    fill
-                    sizes="(max-width: 54rem) 100vw, (max-width: 72rem) 50vw, 33vw"
-                    className="speaker-photo"
-                  />
-                ) : (
-                  <div className={`speaker-surface ${speaker.tone}`} />
-                )}
-                <div className="speaker-gradient" />
-                <div className="speaker-content">
-                  <span>{speaker.role}</span>
-                  <h3>{speaker.name}</h3>
-                  <p>{speaker.copy}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SpeakerShowcase speakers={speakerCards} />
 
       <section className="section-shell schedule-section" id="schedule">
         <div className="section-header section-header-column">
           <span className="section-index">03 / Schedule</span>
-          <h2>The Schedule</h2>
+          <h2>How the Day Unfolded</h2>
         </div>
 
         <div className="schedule-list">
@@ -449,48 +416,29 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="tickets-section" id="tickets">
+      <section className="tickets-section" id="recap">
         <div className="tickets-inner">
-          <h2>Experience the shift.</h2>
+          <h2>The shift already happened.</h2>
           <p>
-            Join us for a day of profound ideas, layered perspectives, and
-            conversations that unsettle the scales we take for granted.
+            Disorders of Magnitude took place on March 27th, 2026 at Duke
+            Kunshan University. Thank you to everyone who joined us — every
+            speaker talk is now live on YouTube.
           </p>
 
           <div className="tickets-actions">
-            <Link href="/reserve" className="ticket-button">
-              Get Tickets
-              <iconify-icon icon="solar:ticket-linear" class="text-base" aria-hidden="true" />
-            </Link>
-            <span className="ticket-note">Going fast - limited seats available</span>
+            <a href="#speakers" className="ticket-button">
+              Watch the Talks
+              <iconify-icon icon="solar:play-circle-linear" class="text-base" aria-hidden="true" />
+            </a>
+            <span className="ticket-note">All eight talks, ready to watch</span>
           </div>
         </div>
       </section>
 
       {/* Scripts */}
-      <Script id="homepage-interactions" strategy="afterInteractive">
+      <Script id="archive-homepage-interactions" strategy="afterInteractive">
         {`
-          const initHomepageInteractions = () => {
-            const carousel = document.getElementById('speaker-carousel');
-            const prevBtn = document.getElementById('prev-speaker');
-            const nextBtn = document.getElementById('next-speaker');
-
-            const getScrollAmount = () => {
-              if (!carousel) return 0;
-              const card = carousel.querySelector('.speaker-card');
-              return card ? card.offsetWidth + 1 : 0;
-            };
-
-            if (nextBtn && prevBtn && carousel) {
-              nextBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-              });
-
-              prevBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-              });
-            }
-
+          const initArchivePageInteractions = () => {
             const pastEventsBtn = document.getElementById('past-events-btn');
             const pastEventsMenu = document.getElementById('past-events-menu');
             const pastEventsIcon = document.getElementById('past-events-icon');
@@ -523,9 +471,9 @@ export default function Home() {
           };
 
           if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initHomepageInteractions, { once: true });
+            document.addEventListener('DOMContentLoaded', initArchivePageInteractions, { once: true });
           } else {
-            initHomepageInteractions();
+            initArchivePageInteractions();
           }
         `}
       </Script>

@@ -1,0 +1,610 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEDx | Disorders of Magnitude</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --ted-red: #eb0028;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+        }
+
+        /* Utilities */
+        .text-ted-red { color: var(--ted-red); }
+        .bg-ted-red { background-color: var(--ted-red); }
+        .border-ted-red { border-color: var(--ted-red); }
+
+        /* Noise Overlay for texture */
+        .bg-noise {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Animations */
+        .animate-fade-up {
+            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(2rem);
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .animate-pulse-slow {
+            animation: pulseSlow 8s ease-in-out infinite alternate;
+        }
+
+        .animate-drift {
+            animation: drift 20s linear infinite;
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulseSlow {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Marquee setup */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 25s linear infinite;
+        }
+
+        @keyframes marquee {
+            0%   { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Custom scrollbars */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* Hide scrollbar for carousel but keep functionality */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black overflow-x-hidden">
+
+    <div class="bg-noise"></div>
+
+    <!-- Ambient Background Hook -->
+    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full aspect-square max-w-4xl bg-ted-red opacity-10 rounded-full blur-3xl mix-blend-screen animate-pulse-slow pointer-events-none -z-10"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 bg-black/50 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-medium tracking-tighter flex items-center gap-1 group">
+                <span class="text-white">TED</span><span class="text-ted-red group-hover:animate-pulse">x</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-light text-zinc-400 tracking-wide">
+                <a href="#theme" class="hover:text-white transition-colors">Theme</a>
+                <a href="#speakers" class="hover:text-white transition-colors">Speakers</a>
+                <a href="#schedule" class="hover:text-white transition-colors">Schedule</a>
+                
+                <!-- Past Events Dropdown -->
+                <div class="relative">
+                    <button id="past-events-btn" class="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none">
+                        Past Events
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-xs transition-transform duration-200" id="past-events-icon"></iconify-icon>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div id="past-events-menu" class="absolute top-full right-0 mt-3 w-48 bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl p-1 opacity-0 pointer-events-none -translate-y-2 transition-all duration-200 z-50 flex flex-col gap-0.5">
+                        <a href="#" class="block px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors tracking-wide">Tomorrow: United?</a>
+                        <a href="#" class="block px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors tracking-wide">Sparks</a>
+                    </div>
+                </div>
+            </div>
+            <a href="#tickets" class="text-xs md:text-sm font-medium bg-white text-black px-4 py-2 rounded-full hover:bg-zinc-200 transition-colors flex items-center gap-2">
+                Get Tickets
+                <iconify-icon icon="solar:ticket-linear" class="text-base"></iconify-icon>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex flex-col justify-center pt-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
+            <div class="flex flex-col gap-4 md:gap-8">
+                <p class="text-ted-red font-medium tracking-widest text-xs uppercase animate-fade-up">An independently organized TED event</p>
+                
+                <h1 class="flex flex-col gap-2">
+                    <span class="text-4xl md:text-6xl lg:text-8xl font-light tracking-tighter text-zinc-500 animate-scale-in">Disorders</span>
+                    <span class="text-lg md:text-2xl font-light italic text-zinc-600 ml-2 md:ml-4 animate-fade-up delay-100">of</span>
+                    <span class="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tighter text-white animate-fade-up delay-200 bg-clip-text text-transparent bg-gradient-to-br from-white to-zinc-500">Magnitude</span>
+                </h1>
+
+                <div class="mt-8 md:mt-16 flex flex-col md:flex-row gap-8 md:gap-16 text-sm font-light text-zinc-400 animate-fade-up delay-300">
+                    <div class="flex flex-col gap-1 border-l border-white/10 pl-4">
+                        <span class="text-white font-medium tracking-tight">Date</span>
+                        <span>October 24, 2024</span>
+                    </div>
+                    <div class="flex flex-col gap-1 border-l border-white/10 pl-4">
+                        <span class="text-white font-medium tracking-tight">Location</span>
+                        <span>Symphony Hall, Boston</span>
+                    </div>
+                    <div class="flex flex-col justify-center border-l border-white/10 pl-4">
+                        <a href="#tickets" class="text-sm font-medium bg-white text-black px-6 py-2.5 rounded-full hover:bg-zinc-200 transition-colors flex items-center gap-2 w-fit">
+                            Get Tickets
+                            <iconify-icon icon="solar:arrow-right-linear" class="text-base"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animated Background Typography -->
+        <div class="absolute bottom-10 right-0 translate-y-1/4 opacity-5 pointer-events-none overflow-hidden w-full select-none">
+            <div class="text-9xl font-medium tracking-tighter whitespace-nowrap animate-drift flex gap-8">
+                <span>SCALE</span>
+                <span>SHIFT</span>
+                <span>DISRUPTION</span>
+                <span>IMPACT</span>
+                <span>SCALE</span>
+                <span>SHIFT</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infinite Marquee -->
+    <div class="border-y border-white/5 py-4 bg-white/5 backdrop-blur-sm relative z-20">
+        <div class="marquee-container text-xs font-light tracking-widest uppercase text-zinc-400 flex items-center">
+            <div class="marquee-content flex gap-8">
+                <span class="flex items-center gap-8">Disorders of Magnitude <span class="w-1 h-1 rounded-full bg-ted-red"></span></span>
+                <span class="flex items-center gap-8">Shifting Perspectives <span class="w-1 h-1 rounded-full bg-ted-red"></span></span>
+                <span class="flex items-center gap-8">Embracing Chaos <span class="w-1 h-1 rounded-full bg-ted-red"></span></span>
+                <span class="flex items-center gap-8">Finding Order <span class="w-1 h-1 rounded-full bg-ted-red"></span></span>
+                <span class="flex items-center gap-8">Disorders of Magnitude <span class="w-1 h-1 rounded-full bg-ted-red"></span></span>
+                <span class="flex items-center gap-8">Shifting Perspectives <span class="w-1 h-1 rounded-full bg-ted-red"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Explanation -->
+    <section id="theme" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-6">
+                <div class="md:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-medium tracking-widest uppercase text-ted-red mb-4 block">01 / The Concept</span>
+                        <h2 class="text-4xl md:text-5xl font-medium tracking-tighter text-white leading-tight">When scale breaks perception.</h2>
+                    </div>
+                    <div class="hidden md:block mt-24">
+                        
+                    </div>
+                </div>
+                
+                <div class="md:col-span-7 md:col-start-6 flex flex-col gap-8 text-base md:text-lg font-light text-zinc-400 leading-relaxed">
+                    <p class="text-xl md:text-2xl text-zinc-200 font-normal tracking-tight">We exist in a universe defined by scale, from the subatomic to the cosmic. But what happens when our intuitive understanding of size, impact, and time fails us?</p>
+                    <p class="">Disorders of Magnitude explores the spaces where traditional metrics break down. It is an examination of exponential growth, cascading failures, microscopic shifts that trigger macroscopic avalanches, and the profound realization that everything we know is just a matter of perspective.</p>
+                    <p>Join us as visionaries across science, art, technology, and sociology attempt to map the unmappable and measure the immeasurable.</p>
+                    
+                    <div class="mt-8 grid grid-cols-2 gap-px bg-white/10 w-full max-w-md">
+                        <div class="bg-black p-6 flex flex-col gap-2 group cursor-pointer">
+                            <iconify-icon icon="solar:maximize-square-minimalistic-linear" class="text-2xl text-zinc-600 group-hover:text-white transition-colors"></iconify-icon>
+                            <span class="text-xs font-medium tracking-tight text-white mt-2">Macro</span>
+                            <span class="text-xs text-zinc-500">Global systems, societal shifts, planetary impact.</span>
+                        </div>
+                        <div class="bg-black p-6 flex flex-col gap-2 group cursor-pointer">
+                            <iconify-icon icon="solar:minimize-square-minimalistic-linear" class="text-2xl text-zinc-600 group-hover:text-white transition-colors"></iconify-icon>
+                            <span class="text-xs font-medium tracking-tight text-white mt-2">Micro</span>
+                            <span class="text-xs text-zinc-500">Quantum mechanics, individual actions, cellular change.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Carousel -->
+    <section id="speakers" class="py-32 border-t border-white/5 bg-zinc-950/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+                <div>
+                    <span class="text-xs font-medium tracking-widest uppercase text-ted-red mb-4 block">02 / Voices</span>
+                    <h2 class="text-4xl md:text-5xl font-medium tracking-tighter text-white">Catalysts of Change</h2>
+                </div>
+                <div class="flex flex-col md:items-end gap-6">
+                    
+                    <a href="#" class="text-sm font-medium text-zinc-400 flex items-center gap-2 hover:text-white transition-colors group pb-1 border-b border-transparent hover:border-white w-fit">
+                        View Full Lineup
+                        <iconify-icon icon="solar:arrow-right-linear" class="text-base group-hover:translate-x-1 transition-transform"></iconify-icon>
+                    </a><div class="flex gap-3 gap-x-3 gap-y-3 items-center">
+                        <button id="prev-speaker" class="w-11 h-11 rounded-full border border-white/10 bg-black text-white hover:bg-white hover:text-black hover:border-white transition-all flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white/20">
+                            <iconify-icon icon="solar:alt-arrow-left-linear" class="text-xl" width="20" height="20" style="color: rgb(0, 0, 0)"></iconify-icon>
+                        </button>
+                        <button id="next-speaker" class="w-11 h-11 rounded-full border border-white/10 bg-black text-white hover:bg-white hover:text-black hover:border-white transition-all flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white/20">
+                            <iconify-icon icon="solar:alt-arrow-right-linear" class="text-xl"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Container -->
+            <div class="relative -mx-6 px-6 md:mx-0 md:px-0">
+                <div id="speaker-carousel" class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory border border-white/5 bg-white/5 gap-px">
+                    
+                    <!-- Speaker Card 1 -->
+                    <div class="speaker-card w-full md:w-[calc(100%/3-0.67px)] flex-none snap-center md:snap-start bg-[#050505] p-8 flex flex-col justify-end min-h-[400px] relative group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+                        <div class="absolute inset-0 bg-zinc-900 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0"></div>
+                        <div class="relative z-20 flex flex-col gap-2 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <span class="text-xs font-medium text-ted-red tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">Astrophysicist</span>
+                            <h3 class="text-2xl font-medium tracking-tight text-white">Dr. Elena Rostova</h3>
+                            <p class="text-sm font-light text-zinc-400 line-clamp-2">Mapping the dark matter web and its implications on galactic formation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Speaker Card 2 -->
+                    <div class="speaker-card w-full md:w-[calc(100%/3-0.67px)] flex-none snap-center md:snap-start bg-[#050505] p-8 flex flex-col justify-end min-h-[400px] relative group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+                        <div class="absolute inset-0 bg-zinc-800 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0"></div>
+                        <div class="relative z-20 flex flex-col gap-2 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <span class="text-xs font-medium text-ted-red tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">Behavioral Economist</span>
+                            <h3 class="text-2xl font-medium tracking-tight text-white">Marcus Chen</h3>
+                            <p class="text-sm font-light text-zinc-400 line-clamp-2">The exponential cost of micro-decisions in global markets.</p>
+                        </div>
+                    </div>
+
+                    <!-- Speaker Card 3 -->
+                    <div class="speaker-card w-full md:w-[calc(100%/3-0.67px)] flex-none snap-center md:snap-start bg-[#050505] p-8 flex flex-col justify-end min-h-[400px] relative group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+                        <div class="absolute inset-0 bg-zinc-900 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0"></div>
+                        <div class="relative z-20 flex flex-col gap-2 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <span class="text-xs font-medium text-ted-red tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">Bio-engineer</span>
+                            <h3 class="text-2xl font-medium tracking-tight text-white">Sarah Al-Fayed</h3>
+                            <p class="text-sm font-light text-zinc-400 line-clamp-2">Engineering bacteria to consume atmospheric carbon at scale.</p>
+                        </div>
+                    </div>
+
+                    <!-- Speaker Card 4 -->
+                    <div class="speaker-card w-full md:w-[calc(100%/3-0.67px)] flex-none snap-center md:snap-start bg-[#050505] p-8 flex flex-col justify-end min-h-[400px] relative group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+                        <div class="absolute inset-0 bg-zinc-800 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0"></div>
+                        <div class="relative z-20 flex flex-col gap-2 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <span class="text-xs font-medium text-ted-red tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">Climate Modeler</span>
+                            <h3 class="text-2xl font-medium tracking-tight text-white">Dr. Aris Thorne</h3>
+                            <p class="text-sm font-light text-zinc-400 line-clamp-2">Predicting the timeline of planetary tipping points.</p>
+                        </div>
+                    </div>
+
+                    <!-- Speaker Card 5 -->
+                    <div class="speaker-card w-full md:w-[calc(100%/3-0.67px)] flex-none snap-center md:snap-start bg-[#050505] p-8 flex flex-col justify-end min-h-[400px] relative group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+                        <div class="absolute inset-0 bg-zinc-900 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0"></div>
+                        <div class="relative z-20 flex flex-col gap-2 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <span class="text-xs font-medium text-ted-red tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quantum Physicist</span>
+                            <h3 class="text-2xl font-medium tracking-tight text-white">Dr. Maya Lin</h3>
+                            <p class="text-sm font-light text-zinc-400 line-clamp-2">The exponential collapse of modern cryptographic infrastructure.</p>
+                        </div>
+                    </div>
+
+                    <!-- Speaker Card 6 -->
+                    <div class="speaker-card w-full md:w-[calc(100%/3-0.67px)] flex-none snap-center md:snap-start bg-[#050505] p-8 flex flex-col justify-end min-h-[400px] relative group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+                        <div class="absolute inset-0 bg-zinc-800 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0"></div>
+                        <div class="relative z-20 flex flex-col gap-2 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <span class="text-xs font-medium text-ted-red tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">Sociologist</span>
+                            <h3 class="text-2xl font-medium tracking-tight text-white">Elias Vance</h3>
+                            <p class="text-sm font-light text-zinc-400 line-clamp-2">Viral dynamics and the speed of modern social contagion.</p>
+                        </div>
+                    </div>
+
+                    <!-- Speaker Card 7 -->
+                    <div class="speaker-card w-full md:w-[calc(100%/3-0.67px)] flex-none snap-center md:snap-start bg-[#050505] p-8 flex flex-col justify-end min-h-[400px] relative group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+                        <div class="absolute inset-0 bg-zinc-900 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0"></div>
+                        <div class="relative z-20 flex flex-col gap-2 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <span class="text-xs font-medium text-ted-red tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">Urban Architect</span>
+                            <h3 class="text-2xl font-medium tracking-tight text-white">Kaelen Ray</h3>
+                            <p class="text-sm font-light text-zinc-400 line-clamp-2">Designing sustainable infrastructure for fractal megacities.</p>
+                        </div>
+                    </div>
+
+                    <!-- Speaker Card 8 -->
+                    <div class="speaker-card w-full md:w-[calc(100%/3-0.67px)] flex-none snap-center md:snap-start bg-[#050505] p-8 flex flex-col justify-end min-h-[400px] relative group overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+                        <div class="absolute inset-0 bg-zinc-800 group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0"></div>
+                        <div class="relative z-20 flex flex-col gap-2 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <span class="text-xs font-medium text-ted-red tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">Neuroscientist</span>
+                            <h3 class="text-2xl font-medium tracking-tight text-white">Nia Okafor</h3>
+                            <p class="text-sm font-light text-zinc-400 line-clamp-2">Rewiring human perception of deep time and cosmic scale.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-32 border-t border-white/5 bg-[#050505]">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="flex flex-col mb-16">
+                <span class="text-xs font-medium tracking-widest uppercase text-ted-red mb-4 block">03 / Itinerary</span>
+                <h2 class="text-4xl md:text-5xl font-medium tracking-tighter text-white">The Schedule</h2>
+            </div>
+
+            <div class="flex flex-col border-t border-white/10">
+                <!-- Schedule Item -->
+                <div class="group flex flex-col md:flex-row py-8 border-b border-white/10 hover:px-4 -mx-4 px-4 transition-all duration-300">
+                    <div class="w-48 text-sm font-medium text-zinc-500 group-hover:text-ted-red transition-colors mb-2 md:mb-0 pt-1">08:30 AM</div>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <h3 class="text-lg font-medium text-white tracking-tight">Doors Open &amp; Registration</h3>
+                        <p class="text-sm font-light text-zinc-400">Main Lobby, Symphony Hall. Light breakfast and coffee will be served.</p>
+                    </div>
+                </div>
+
+                <!-- Schedule Item -->
+                <div class="group flex flex-col md:flex-row py-8 border-b border-white/10 hover:px-4 -mx-4 px-4 transition-all duration-300">
+                    <div class="w-48 text-sm font-medium text-zinc-500 group-hover:text-ted-red transition-colors mb-2 md:mb-0 pt-1">09:30 AM</div>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <h3 class="text-lg font-medium text-white tracking-tight">Opening Remarks</h3>
+                        <p class="text-sm font-light text-zinc-400">Alex Rivera, Lead Organizer</p>
+                    </div>
+                </div>
+
+                <!-- Schedule Item -->
+                <div class="group flex flex-col md:flex-row py-8 border-b border-white/10 hover:px-4 -mx-4 px-4 transition-all duration-300 bg-white/[0.02]">
+                    <div class="w-48 text-sm font-medium text-zinc-500 group-hover:text-ted-red transition-colors mb-2 md:mb-0 pt-1">10:00 AM</div>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <span class="text-xs font-medium tracking-widest uppercase text-ted-red">Session 1</span>
+                        <h3 class="text-lg font-medium text-white tracking-tight">The Macro: Systems at Scale</h3>
+                        <p class="text-sm font-light text-zinc-400">Featuring Dr. Elena Rostova &amp; Marcus Chen exploring cosmic and global economic structures.</p>
+                    </div>
+                </div>
+
+                <!-- Schedule Item -->
+                <div class="group flex flex-col md:flex-row py-8 border-b border-white/10 hover:px-4 -mx-4 px-4 transition-all duration-300">
+                    <div class="w-48 text-sm font-medium text-zinc-500 group-hover:text-ted-red transition-colors mb-2 md:mb-0 pt-1">12:00 PM</div>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <h3 class="text-lg font-medium text-white tracking-tight">Lunch &amp; Networking</h3>
+                        <p class="text-sm font-light text-zinc-400">Catered lunch in the Grand Atrium. Interactive exhibits open.</p>
+                    </div>
+                </div>
+
+                <!-- Schedule Item -->
+                <div class="group flex flex-col md:flex-row py-8 border-b border-white/10 hover:px-4 -mx-4 px-4 transition-all duration-300 bg-white/[0.02]">
+                    <div class="w-48 text-sm font-medium text-zinc-500 group-hover:text-ted-red transition-colors mb-2 md:mb-0 pt-1">01:30 PM</div>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <span class="text-xs font-medium tracking-widest uppercase text-ted-red">Session 2</span>
+                        <h3 class="text-lg font-medium text-white tracking-tight">The Micro: Invisible Catalysts</h3>
+                        <p class="text-sm font-light text-zinc-400">Featuring Sarah Al-Fayed on cellular engineering and quantum impacts.</p>
+                    </div>
+                </div>
+
+                <!-- Schedule Item -->
+                <div class="group flex flex-col md:flex-row py-8 border-b border-white/10 hover:px-4 -mx-4 px-4 transition-all duration-300">
+                    <div class="w-48 text-sm font-medium text-zinc-500 group-hover:text-ted-red transition-colors mb-2 md:mb-0 pt-1">03:00 PM</div>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <h3 class="text-lg font-medium text-white tracking-tight">Coffee Break</h3>
+                    </div>
+                </div>
+
+                <!-- Schedule Item -->
+                <div class="group flex flex-col md:flex-row py-8 border-b border-white/10 hover:px-4 -mx-4 px-4 transition-all duration-300 bg-white/[0.02]">
+                    <div class="w-48 text-sm font-medium text-zinc-500 group-hover:text-ted-red transition-colors mb-2 md:mb-0 pt-1">03:30 PM</div>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <span class="text-xs font-medium tracking-widest uppercase text-ted-red">Closing</span>
+                        <h3 class="text-lg font-medium text-white tracking-tight">Synthesis Panel</h3>
+                        <p class="text-sm font-light text-zinc-400">All speakers return to the stage to discuss the intersection of their disciplines.</p>
+                    </div>
+                </div>
+
+                <!-- Schedule Item -->
+                <div class="group flex flex-col md:flex-row py-8 hover:px-4 -mx-4 px-4 transition-all duration-300">
+                    <div class="w-48 text-sm font-medium text-zinc-500 group-hover:text-ted-red transition-colors mb-2 md:mb-0 pt-1">05:00 PM</div>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <h3 class="text-lg font-medium text-white tracking-tight">Afterparty &amp; Reception</h3>
+                        <p class="text-sm font-light text-zinc-400">Join us for drinks, music, and continued conversations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizing Team -->
+    <section id="team" class="py-32 border-t border-white/5 bg-[#050505]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col mb-16">
+                <span class="text-xs font-medium tracking-widest uppercase text-ted-red mb-4 block">04 / Organizing Team</span>
+                <h2 class="text-4xl md:text-5xl font-medium tracking-tighter text-white">The Curators</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
+                <!-- Team Member 1 -->
+                <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="w-full aspect-square relative overflow-hidden bg-zinc-900 border border-white/5">
+                        <div class="absolute inset-0 bg-zinc-800 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-700 ease-out"></div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-base font-medium tracking-tight text-white group-hover:text-ted-red transition-colors">Alex Rivera</h3>
+                        <span class="text-xs font-light text-zinc-500">Lead Organizer</span>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="w-full aspect-square relative overflow-hidden bg-zinc-900 border border-white/5">
+                        <div class="absolute inset-0 bg-zinc-900 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-700 ease-out"></div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-base font-medium tracking-tight text-white group-hover:text-ted-red transition-colors">Jordan Lee</h3>
+                        <span class="text-xs font-light text-zinc-500">Curation Director</span>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="w-full aspect-square relative overflow-hidden bg-zinc-900 border border-white/5">
+                        <div class="absolute inset-0 bg-zinc-800 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-700 ease-out"></div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-base font-medium tracking-tight text-white group-hover:text-ted-red transition-colors">Sam Taylor</h3>
+                        <span class="text-xs font-light text-zinc-500">Experience Design</span>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="w-full aspect-square relative overflow-hidden bg-zinc-900 border border-white/5">
+                        <div class="absolute inset-0 bg-zinc-900 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-700 ease-out"></div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-base font-medium tracking-tight text-white group-hover:text-ted-red transition-colors">Casey Smith</h3>
+                        <span class="text-xs font-light text-zinc-500">Partnerships</span>
+                    </div>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="w-full aspect-square relative overflow-hidden bg-zinc-900 border border-white/5">
+                        <div class="absolute inset-0 bg-zinc-800 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-700 ease-out"></div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-base font-medium tracking-tight text-white group-hover:text-ted-red transition-colors">Morgan Davis</h3>
+                        <span class="text-xs font-light text-zinc-500">Marketing &amp; PR</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tickets CTA -->
+    <section id="tickets" class="py-32 border-t border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-ted-red/5 mix-blend-screen pointer-events-none"></div>
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-medium tracking-tighter text-white mb-6">Experience the shift.</h2>
+            <p class="text-sm md:text-base font-light text-zinc-400 mb-10">Join us for a day of profound ideas and unparalleled networking. General admission passes are now available.</p>
+            
+            <div class="flex flex-col items-center gap-6">
+                <a href="#tickets" class="bg-white text-black px-8 py-3.5 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2">
+                    Get Tickets
+                    <iconify-icon icon="solar:ticket-linear" class="text-lg"></iconify-icon>
+                </a>
+                <span class="text-xs font-light text-zinc-500 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-ted-red animate-pulse"></span>
+                    Selling Fast — Limited Seats Available
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-black py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <a href="#" class="text-2xl font-medium tracking-tighter flex items-center gap-1">
+                    <span class="text-white">TED</span><span class="text-ted-red">x</span>
+                </a>
+                <p class="text-xs font-light text-zinc-600">This independent TEDx event is operated under license from TED.</p>
+            </div>
+            
+            <div class="flex gap-6 text-xs font-medium text-zinc-500 tracking-tight">
+                <a href="#" class="hover:text-white transition-colors">Twitter</a>
+                <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Carousel Logic
+            const carousel = document.getElementById('speaker-carousel');
+            const prevBtn = document.getElementById('prev-speaker');
+            const nextBtn = document.getElementById('next-speaker');
+
+            const getScrollAmount = () => {
+                const card = carousel.querySelector('.speaker-card');
+                return card.offsetWidth + 1;
+            };
+
+            if(nextBtn && prevBtn && carousel) {
+                nextBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                });
+            }
+
+            // Dropdown Logic
+            const pastEventsBtn = document.getElementById('past-events-btn');
+            const pastEventsMenu = document.getElementById('past-events-menu');
+            const pastEventsIcon = document.getElementById('past-events-icon');
+
+            if(pastEventsBtn && pastEventsMenu) {
+                pastEventsBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isExpanded = pastEventsMenu.classList.contains('opacity-100');
+                    
+                    if (isExpanded) {
+                        pastEventsMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                        pastEventsMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+                        pastEventsIcon.classList.remove('rotate-180');
+                    } else {
+                        pastEventsMenu.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                        pastEventsMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+                        pastEventsIcon.classList.add('rotate-180');
+                    }
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!pastEventsMenu.contains(e.target) && e.target !== pastEventsBtn) {
+                        pastEventsMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                        pastEventsMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+                        pastEventsIcon.classList.remove('rotate-180');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TEDxDKU - Disorders of Magnitude</title>
+<!-- Tailwind CSS CDN with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- BEGIN: Custom Font & Style Configurations -->
+<style data-purpose="typography">
+    /* Importing a serif font to mimic LaTeX/Academic aesthetic */
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;700&display=swap');
+
+    :root {
+      --latex-font: 'Libre Baskerville', serif;
+      --ui-font: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      font-family: var(--ui-font);
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Keep it as a clean landing snapshot */
+    }
+
+    .latex-style {
+      font-family: 'Libre Baskerville', serif;
+    }
+
+    /* Specialized logo styling for "Disorders of Magnitude" */
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 0.85; /* Tightened leading for a compact, punchy look */
+    }
+
+    .disorder-text {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    /* Stylized letter shifts to evoke "Disorder" and "Magnitude" */
+    .shift-up { vertical-align: 0.4em; font-size: 0.85em; }
+    .shift-down { vertical-align: -0.3em; font-size: 1.1em; }
+    .tilt-left { transform: rotate(-8deg) translateY(0.1em); display: inline-block; }
+    .tilt-right { transform: rotate(12deg) translateY(-0.1em); display: inline-block; }
+    
+    .bold-mag { 
+      font-weight: 900; 
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+      text-transform: uppercase;
+      display: inline-flex;
+      letter-spacing: 0.1em; 
+    }
+
+    /* Character-level transformations for MAGNITUDE */
+    .mag-char { 
+      display: inline-block; 
+      transform-origin: center; 
+      margin: 0 0.05em; 
+    }
+    .stretch-xs { transform: scaleX(0.6); }
+    .stretch-s { transform: scaleX(0.85); }
+    .stretch-m { transform: scaleX(1.2); }
+    .stretch-l { transform: scaleX(1.5); }
+    .stretch-xl { transform: scaleX(1.8); }
+
+    .cursive-of {
+      font-family: 'Times New Roman', Times, serif;
+      text-transform: lowercase;
+      font-style: normal;
+    }
+    </style>
+<style data-purpose="layout-animations">
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 1.2s ease-out forwards;
+    }
+  </style>
+<!-- END: Custom Font & Style Configurations -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&amp;display=swap" rel="stylesheet"/></head>
+<body class="bg-[#0a0a0a] text-white flex flex-col min-h-screen">
+<!-- BEGIN: Top Navigation / Branding -->
+<header class="fixed top-0 left-0 w-full p-8 md:p-12 flex justify-between items-start z-10" data-purpose="site-header">
+<div class="tedx-logo-container">
+<!-- Minimalist TEDxDKU Logo Representation -->
+<div aria-label="TEDxDKU Logo" class="flex items-baseline space-x-1">
+<span class="text-red-600 font-bold text-2xl tracking-tighter" style="">TED<sup class="text-xs font-bold -top-4">x</sup></span>
+<span class="text-white font-medium text-xl tracking-tight" style="">DKU</span>
+</div>
+</div>
+<nav class="hidden md:block">
+<ul class="flex space-x-8 text-sm uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">
+<li class="" style=""><a class="hover:text-red-600 transition-colors" href="#" style="">About</a></li>
+<li class="" style=""><a class="hover:text-red-600 transition-colors" href="#" style="">Speakers</a></li>
+<li class="" style=""><a class="hover:text-red-600 transition-colors" href="#" style="">Contact</a></li>
+</ul>
+</nav>
+</header>
+<!-- END: Top Navigation / Branding -->
+<!-- BEGIN: Hero Section -->
+<main class="flex-grow flex flex-col justify-center items-center px-4 relative" data-purpose="hero-section">
+<!-- Central Typographic Logo -->
+<div class="text-center animate-fade-in" data-purpose="main-typography-focus">
+<h1 class="latex-style select-none" style="">
+<span class="logo-container" style="">
+<!-- Top Line: Disorders of -->
+<span class="whitespace-nowrap text-3xl md:text-5xl lg:text-6xl flex items-center justify-center" style="">
+<span class="disorder-text" style="">D</span><span class="disorder-text shift-up" style="">i</span><span class="disorder-text tilt-left" style="">s</span><span class="disorder-text" style="">o</span><span class="disorder-text shift-down" style="">r</span><span class="disorder-text tilt-right" style="">d</span><span class="disorder-text" style="">e</span><span class="disorder-text" style="">r</span><span class="disorder-text italic" style="">s</span>
+<span class="cursive-of opacity-60 ml-3 md:ml-4 lg:ml-5 text-2xl md:text-3xl lg:text-4xl" style="">of</span>
+</span>
+<!-- Bottom Line: MAGNITUDE -->
+<span class="bold-mag text-5xl md:text-8xl lg:text-[10rem] mt-2 lg:mt-4" style="">
+<span class="mag-char stretch-m" style="">M</span><span class="mag-char stretch-xs" style="">A</span><span class="mag-char stretch-xl" style="">G</span><span class="mag-char stretch-s" style="">N</span><span class="mag-char" style="">I</span><span class="mag-char stretch-xs" style="">T</span><span class="mag-char stretch-m" style="">U</span><span class="mag-char stretch-xl" style="">D</span><span class="mag-char stretch-s" style="">E</span>
+</span>
+</span>
+</h1>
+</div>
+</main>
+<!-- END: Hero Section -->
+<!-- BEGIN: Bottom Info -->
+<footer class="w-full p-8 md:p-12 flex flex-col md:flex-row justify-between items-center text-xs md:text-sm tracking-widest uppercase opacity-60" data-purpose="footer-info">
+<div class="mb-4 md:mb-0" style="">
+      Kunshan, China • Fall 2024
+    </div>
+<div class="group cursor-pointer flex items-center space-x-2 border-b border-transparent hover:border-white transition-all duration-300 pb-1">
+<span class="" style="">Learn More</span>
+<svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</footer>
+<!-- END: Bottom Info -->
+</body></html>
